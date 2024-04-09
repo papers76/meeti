@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-module.exports = new Sequelize('meeti','postgres','', {
+module.exports = new Sequelize('meeti','postgres','root', {
     host: '127.0.0.1',
     port: '5432',
     dialect: 'postgres',
@@ -9,5 +9,5 @@ module.exports = new Sequelize('meeti','postgres','', {
         min: 0,
         acquire: 30000,
         idle: 10000
-    }
+    }, loggin: false
 });
