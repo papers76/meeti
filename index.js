@@ -1,15 +1,26 @@
 const express = require('express');
 const path = require('path');
+const bodyParser = require ('body-parser');
 const router = require('./routes');
+
+
 const expressLayouts = require('express-ejs-layouts')
 
+
+//CONFIGURACION Y MODELOS BD
 const db = require('./config/db');
 require('./models/usuarios');
 db.sync().then(() => console.log('DB CONECTADA')).catch((error) => console.log(error));
 
+//VARIABLES DE DESARROLLO 
 require('dotenv').config( { path: 'variables.env' } );   
 
+//APLICACION PRINCIPAL
 const app = express();
+
+//BODY PARSER, LEER FORMULARIOS 
+app.use (bodyParser.json());
+app.use (bodyParser.urlencoded({extended: true}));
 
 //Habilitar EJS como template engine
 
