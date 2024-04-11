@@ -1,10 +1,12 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require ('body-parser');
+const flash = require('connect-flash');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 const router = require('./routes');
-
-
 const expressLayouts = require('express-ejs-layouts')
+
 
 
 //CONFIGURACION Y MODELOS BD
@@ -14,6 +16,11 @@ db.sync().then(() => console.log('DB CONECTADA')).catch((error) => console.log(e
 
 //VARIABLES DE DESARROLLO 
 require('dotenv').config( { path: 'variables.env' } );   
+
+
+// Imprimir variables de entorno
+console.log("Valor de SECRETO:", process.env.SECRETO);
+console.log("Valor de KEY:", process.env.KEY);
 
 //APLICACION PRINCIPAL
 const app = express();
@@ -33,8 +40,25 @@ app.set('views', path.join(__dirname, './views'));
 // Archivos estaticos
 app.use(express.static('public'));
 
+// HABIILITAR COOKIE PARSER
+app.use(cookieParser());
+
+// crear la sesion
+ 
+app.use(session({
+    secret: process.env.SECRETO,
+    key: process.env.KEY, 
+    resave : false,
+    saveUninitialized : false
+}));
+
+//AGREGA FLASH MESSAGES 
+
+app.use(flash());
+
 //Middleware (usuario logueado, flash messages, fecha actual)
 app.use((req, res, next) =>{
+    res.locals.mensajes = req.flash();
     const fecha = new Date();
     res.locals.year = fecha.getFullYear();
     next();
@@ -48,4 +72,4 @@ app.use('/', router());
 //Agrega el puerto
 app.listen(process.env.PORT, () => {
     console.log("El servidor esta funcionando");
-}); 
+});
