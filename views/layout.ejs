@@ -18,7 +18,9 @@
     />
     <link rel="stylesheet" href="/css/app.css" />
   </head>
-  <body>
+
+  <body>  
+
     <header class="site-header contenedor">
       <a href="/">
         <img src="/img/logo.png" alt="logo Meeti" />
@@ -29,6 +31,19 @@
         <a href="/crear-cuenta">Registrarte</a>
       </nav>
     </header>
+
+    <% if (locals.mensajes) { %>
+      <% const categoria = Object.keys(locals.mensajes) %>      
+      <% if (categoria.length) { %>                                
+  
+        <% locals.mensajes[categoria].forEach(alerta => { %>     
+            <div class="alertas"> 
+            <p class="alerta <%= categoria %>"><%= alerta %></p>   
+          </div> 
+  
+          <% }) %>
+        <% } %> 
+    <% } %>
 
     <%- body %>
 

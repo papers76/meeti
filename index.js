@@ -40,6 +40,10 @@ app.set('views', path.join(__dirname, './views'));
 // Archivos estaticos
 app.use(express.static('public'));
 
+//HABILITAR COOKIE PARSER 
+app.use(cookieParser());
+
+
 // HABIILITAR COOKIE PARSER
 app.use(cookieParser());
 
@@ -58,7 +62,7 @@ app.use(flash());
 
 //Middleware (usuario logueado, flash messages, fecha actual)
 app.use((req, res, next) =>{
-    res.locals.mensajes = req.flash();
+    res.locals.mensajes = req.flash(); 
     const fecha = new Date();
     res.locals.year = fecha.getFullYear();
     next();
