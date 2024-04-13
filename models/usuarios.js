@@ -46,8 +46,7 @@ const Usuarios = db.define('usuarios', {
         }
     }
 
-}
-);
+});
 
 //METODO PARA COMPARAR LOS PASSWORD
 
