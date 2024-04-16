@@ -36,3 +36,10 @@ exports.crearNuevaCuenta = async (req, res) => {
         res.redirect('/crear-cuenta');
     }
 };
+
+
+exports.formIniciarSesion = (req, res) => {
+    res.render('iniciar-sesion', {
+        nombrePagina: 'Iniciar Sesion'
+    });
+};

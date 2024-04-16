@@ -8,6 +8,7 @@ module.exports = function () {
     router.get('/', homeController.home );
     router.get('/crear-cuenta', usuariosController.formCrearCuenta);
     router.post('/crear-cuenta', usuariosController.crearNuevaCuenta);
+    router.get('/iniciar-sesion', usuariosController.formIniciarSesion);
        
 
     return router;
