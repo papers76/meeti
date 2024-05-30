@@ -23,6 +23,6 @@
     "express-session": "^1.18.0",
     "express-validator": "^7.0.1",
     "pg": "^8.11.5",
-    "sequelize": "^6.37.2"
+    "sequelize": "^6.37.3"
   }
 }
